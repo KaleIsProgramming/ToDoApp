@@ -17,10 +17,16 @@ export interface postUser {
 
 export interface usersInitial {
     users: user[];
+    loggedUser: user;
 }
 
 const initialState: usersInitial = {
     users: [],
+    loggedUser: {
+        _id:'6578b7c792c0ab7a2abaae5a', 
+        login: 'Guest', 
+        password: 'admin'
+    }
 };
 
 
@@ -67,7 +73,12 @@ export const postUser = createAsyncThunk(
 const usersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        setActiveUser(state, payload:any) {
+            state.loggedUser = payload; 
+
+        }
+    },
     extraReducers(builder) {
         builder.addCase(getUsers.fulfilled, (state, {payload}: any) => {
             state.users = payload.data.data;

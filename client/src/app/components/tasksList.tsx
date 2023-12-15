@@ -20,11 +20,9 @@ export const TaskList = () => {
     }
 
     const notSortedData: task[] = [...data];
-    const SortedDataASC: task[] = notSortedData.sort(compareByDate);
+    let SortedDataASC: task[] = [];
     let SortedDataDSC: task[] = []
-    for(let i = 0; i < notSortedData.length; i++) {
-        SortedDataDSC[i] = SortedDataASC[notSortedData.length - i - 1]
-    }
+
 
 
     let filteredByPriority: task[] = data.filter(item => PriorityE[item.priority].toLowerCase().includes(isSearching.toLowerCase()));
@@ -61,6 +59,19 @@ export const TaskList = () => {
     filterdSortedData = arrayUnique(filteredByPriority.concat(filteredByCreator));
     filterdSortedData = arrayUnique(filterdSortedData.concat(filteredByStatus))
 
+    if(isSearching != '' && isSearching != null && isSearching != undefined) {
+        
+        filterdSortedData = filterdSortedData.sort(compareByDate)
+        for(let i = 0; i < notSortedData.length; i++) {
+            SortedDataDSC[i] = SortedDataASC[notSortedData.length - i - 1]
+        }
+    } else {
+        filterdSortedData = notSortedData.sort(compareByDate)
+        for(let i = 0; i < notSortedData.length; i++) {
+            SortedDataDSC[i] = SortedDataASC[notSortedData.length - i - 1]
+        }
+    }
+
 
     const sortHandler = () => {
         if(sortBy == "ASC") {
@@ -90,22 +101,31 @@ export const TaskList = () => {
                 </div>
                 {
                     
-                    isSearching != '' && isSearching != null && isSearching != undefined ?
-                    SortedDataASC.map(task => {
+                    isSearching != '' && isSearching != null && isSearching != undefined && sortBy == '' ?
+                    filterdSortedData.map(task => {
                         return <Task key={task._id} data={task}></Task>
+                    })
+                    : sortBy == "DSC" && isSearching != '' && isSearching != null && isSearching != undefined ?
+                    filterdSortedData.map(task => {
+                        return  <Task key={task._id} data={task}></Task>
                     })
                     : sortBy == "DSC" ?
                     SortedDataDSC.map(task => {
                         return  <Task key={task._id} data={task}></Task>
                     })
-                    : sortBy == "ASC" ?
+                    : sortBy == "ASC" && isSearching != '' && isSearching != null && isSearching != undefined  ?
                     filterdSortedData.map(task => {
                         return <Task key={task._id} data={task}></Task>
                     })
-                    : 
+                    : sortBy == "ASC" ?
+                    SortedDataASC.map(task => {
+                        return <Task key={task._id} data={task}></Task>
+                    })
+                    : isSearching == '' || isSearching == null || isSearching == undefined ?
                     data.map(task => {
                         return <Task key={task._id} data={task}></Task>
                     })
+                    : <></>
                 }
         </div>
     )
