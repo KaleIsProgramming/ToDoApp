@@ -10,6 +10,5 @@ router.delete('/remove-task/:id', adminController.removeTask);
 router.put('/edit-task/:id', adminController.editTask);
 router.post('/post-user', adminController.postUser);
 router.get('/get-users', adminController.getUsers);
-//router.get('/get-user/:login', adminController.getUser);
 
 module.exports = router;

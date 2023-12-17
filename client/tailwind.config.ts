@@ -31,6 +31,8 @@ const config: Config = {
         lg: '16px',
         xl: '24px',
         xxl: '32px',
+        xxxl: '82px',
+        xxxxl: '256px',
         128: '32rem',
         192: '48rem',
         256: '64rem',
@@ -38,22 +40,22 @@ const config: Config = {
         eight: '12.5%',
         ninth: '11.111111111%',
         tenth: '10%',
+        eighttenth: '80%',
+        ninetenth: '90%',
       },
       screens: {
+
+        'xs': '350px',
+
         'sm': '640px',
-        // => @media (min-width: 640px) { ... }
   
         'md': '768px',
-        // => @media (min-width: 768px) { ... }
   
         'lg': '1024px',
-        // => @media (min-width: 1024px) { ... }
   
         'xl': '1280px',
-        // => @media (min-width: 1280px) { ... }
   
         '2xl': '1536px',
-        // => @media (min-width: 1536px) { ... }
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

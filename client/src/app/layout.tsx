@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html className='bg-purple' lang="en">
       <body className={inter.className}><Providers>{children}</Providers></body>
     </html>
   )

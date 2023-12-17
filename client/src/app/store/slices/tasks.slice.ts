@@ -1,5 +1,6 @@
 'use client';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 export interface task {
@@ -30,7 +31,7 @@ interface removeId {
 }
 
 const initialState: tasks = {
-    tasks: []
+    tasks: [],
 };
 
 export const postTask = createAsyncThunk(
@@ -109,7 +110,8 @@ export const getTasks = createAsyncThunk(
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
-    reducers: {},
+    reducers: {
+    },
     extraReducers(builder) {
         builder.addCase(getTasks.fulfilled, (state, {payload}: any) => {
             state.tasks = payload.data.data;

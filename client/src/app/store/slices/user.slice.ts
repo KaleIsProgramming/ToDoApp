@@ -42,17 +42,6 @@ export const getUsers = createAsyncThunk(
     }
 )
 
-// export const getUser = createAsyncThunk(
-//     "get_user",
-//     async (payload:{login: string;}, {signal}) => {
-//         const source = axios.CancelToken.source();
-//         signal.addEventListener('abort', () => {
-//             source.cancel();
-//         });
-//         return axios.get(`http://localhost:3001/get-user/${payload.login}`);
-        
-//     }
-// )
 
 export const postUser = createAsyncThunk(
     "post-users",
@@ -83,13 +72,7 @@ const usersSlice = createSlice({
         builder.addCase(getUsers.fulfilled, (state, {payload}: any) => {
             state.users = payload.data.data;
         });
-        // builder.addCase(getUser.fulfilled, (state, {payload}: any) => {
-        //     state.loggedUser._id = payload.data.data._id;
-        //     state.loggedUser.login = payload.data.data.login;
-        //     state.loggedUser.password = payload.data.data.password;
-        // });
         builder.addCase(postUser.fulfilled, (state, {payload}: any) => {
-            console.log(payload)
             state.users = payload.data.data;
         });
 

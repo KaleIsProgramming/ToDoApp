@@ -43,7 +43,6 @@ class Task {
     }
 
     editTask(id:string) {
-        console.log(this)
         const db = getDb();
         return db.collection('tasks').updateOne({_id: new mongodb.ObjectId(id)}, {$set: this}).then().catch();
     }

@@ -2,7 +2,7 @@ import Task from "../models/task"
 import User from "../models/user"
 import { Request, Response, NextFunction } from 'express';
 import { tasks } from "../models/task";
-import { users, user } from "../models/user";
+import { users } from "../models/user";
 
 
 exports.getTasks = (req: Request, res: Response, next: NextFunction) => {
@@ -65,12 +65,4 @@ exports.getUsers = (req: Request, res: Response, next: NextFunction) => {
      })
     .catch();
 }
-
-// exports.getUser = (req: Request, res: Response, next: NextFunction) => {
-//     User.getUser(req.params.login)
-//     .then((data: user) => {
-//          return res.status(200).json({data: data})
-//      })
-//     .catch();
-// }
 

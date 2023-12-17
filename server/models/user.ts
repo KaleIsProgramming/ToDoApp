@@ -1,5 +1,4 @@
 const getDb = require("../util/database").getDb;
-const mongodb = require('mongodb');
 
 export interface user {
     _id?: string;
@@ -29,11 +28,6 @@ class User {
         const db = getDb();
         return db.collection('users').find().toArray().then((data:users) => data).catch();
     }
-
-    // static getUser(login: string) {
-    //     const db = getDb();
-    //     return db.collection('users').find({login}).toArray().then((data:users) => data).catch();
-    // }
 }
 
 export default User;
