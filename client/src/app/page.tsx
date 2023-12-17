@@ -1,8 +1,8 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAppDispatch } from "./store";
-import { TaskList } from "@/app/components";
-import { getTasks, getUsers, postTask, postUser } from './store/slices';
+import { TaskList, PopUp } from "@/app/components";
+import { getTasks, postTask, postUser } from './store/slices';
 import { useAppSelector } from "./store";
 import { user } from "./store/slices";
 
@@ -12,7 +12,8 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.userSlice.users);
   const [activeUser, setActiveUser] = useState<user>({_id: "6578b7c792c0ab7a2abaae5a",login:'Guest' ,password: 'admin' });
-  //const [activeUserNameOnly, setActiveUserNameOnly] = useState();
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpType, setPopUpType] = useState('');
 
   const submitUserHandler = (e:any, type:string) => {
 
@@ -21,10 +22,13 @@ export default function Home() {
     const password1I = document.getElementById('password1') as HTMLInputElement;
     const login1I = document.getElementById('login1') as HTMLInputElement;
     if(type=='registration') {
-      dispatch(postUser({login: login1I.value, password: password1I.value}))
-      console.log('123')
+      setIsPopUpOpen(!isPopUpOpen);
+      setPopUpType('register');
+      dispatch(postUser({login: login1I.value, password: password1I.value}));
     } else {
       e.preventDefault();
+      setIsPopUpOpen(!isPopUpOpen);
+      setPopUpType('login');
       if(users.filter(user => user.login == loginI.value)[0]) {
         const user = users.filter(user => user.login == loginI.value)
         setActiveUser(user[0])
@@ -110,6 +114,12 @@ export default function Home() {
               </div>
             </div>
             <TaskList />
+            {isPopUpOpen && popUpType != '' ? 
+              <PopUp data={{
+                type: popUpType
+            }}/>
+              :
+              <></>}
           </div>
       </main>
   )

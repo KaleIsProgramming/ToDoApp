@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/app/store"
 import { Task } from ".";
-import {KeyboardArrowDown, KeyboardArrowUp} from '@mui/icons-material';
+import {KeyboardArrowDown, KeyboardArrowUp, Sort} from '@mui/icons-material';
 import { task, user } from "@/app/store/slices";
 import { PriorityE,  } from ".";
 
@@ -61,14 +61,15 @@ export const TaskList = () => {
 
     if(isSearching != '' && isSearching != null && isSearching != undefined) {
         
-        filterdSortedData = filterdSortedData.sort(compareByDate)
-        for(let i = 0; i < notSortedData.length; i++) {
-            SortedDataDSC[i] = SortedDataASC[notSortedData.length - i - 1]
+        SortedDataASC = filterdSortedData.sort(compareByDate)
+        for(let i = 0; i < filterdSortedData.length; i++) {
+            SortedDataDSC[i] = SortedDataASC[SortedDataASC.length - (i+1)]
+
         }
     } else {
-        filterdSortedData = notSortedData.sort(compareByDate)
+        SortedDataASC = notSortedData.sort(compareByDate)
         for(let i = 0; i < notSortedData.length; i++) {
-            SortedDataDSC[i] = SortedDataASC[notSortedData.length - i - 1]
+            SortedDataDSC[i] = SortedDataASC[SortedDataASC.length - (i + 1)]
         }
     }
 
@@ -81,7 +82,6 @@ export const TaskList = () => {
             setSortBy("ASC") 
         }
     }
-
 
 
     return(
@@ -106,7 +106,7 @@ export const TaskList = () => {
                         return <Task key={task._id} data={task}></Task>
                     })
                     : sortBy == "DSC" && isSearching != '' && isSearching != null && isSearching != undefined ?
-                    filterdSortedData.map(task => {
+                    SortedDataDSC.map(task => {
                         return  <Task key={task._id} data={task}></Task>
                     })
                     : sortBy == "DSC" ?
@@ -114,7 +114,7 @@ export const TaskList = () => {
                         return  <Task key={task._id} data={task}></Task>
                     })
                     : sortBy == "ASC" && isSearching != '' && isSearching != null && isSearching != undefined  ?
-                    filterdSortedData.map(task => {
+                    SortedDataASC.map(task => {
                         return <Task key={task._id} data={task}></Task>
                     })
                     : sortBy == "ASC" ?

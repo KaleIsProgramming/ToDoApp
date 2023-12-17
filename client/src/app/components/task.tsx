@@ -22,6 +22,7 @@ export const Task:FC<TaskData> = ({data}) => {
     
     const [ isOpen, setIsOpen ] = useState(false);
     const [ mode, setMode ] = useState('');
+    const [ isItFirstOpen, setIsItFirstOpen ] = useState(true);
 
     const users = useAppSelector((state) => state.userSlice.users);
     const creator = users.find(user => user._id == data.creator);
@@ -39,17 +40,31 @@ export const Task:FC<TaskData> = ({data}) => {
     
 
     const editHandler = () => {
-        setMode('edit');
-        setIsOpen(!isOpen);
+        if(isOpen) {
+            setMode('edit');
+            setIsOpen(!isOpen);
+            
+        } else {
+
+        }
     }
     const removeHandler = () => {
-        setMode('remove');
-        setIsOpen(!isOpen);
-    }
+        if(isOpen || isItFirstOpen == false) {
+            setMode('remove');
+            setIsOpen(!isOpen);
+        
+        } else {
+            setMode('remove');
+            setIsOpen(!isOpen);
+            setIsItFirstOpen(false)
+        }
 
+    }
+    console.log(+isOpen +1)
+    console.log(+isItFirstOpen +1)
     return(
         <>
-            {isOpen ? 
+            {(isOpen) || ((+isOpen +1) == (+isItFirstOpen + 1))? 
             <>
                 <PopUp data={{type: mode, data}} />
                 { date == formatedDeadline ?
