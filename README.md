@@ -1,6 +1,6 @@
 To run app, open the client and server folders in different windows
 
-----SERVER SIDE-----
+----SERVER SIDE-----------------------------------------
 
   ----SETTING UP DATABASE----
     the back-end works on mongodb database. To connect it you need to create your own free or paid mongodb database from following website : 
@@ -16,7 +16,7 @@ To run app, open the client and server folders in different windows
 
 
 
-----CLIENT SIDE----- 
+----CLIENT SIDE----------------------------------------
   
   ----RUNNING APP LOCALY----
     In your client side window open the console in your IDE and type in this commend: "npm i" and this one: "npm run dev" its gonna make it run localy on port number 3000.
