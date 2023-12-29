@@ -25,8 +25,8 @@ export const TaskList = () => {
 
 
 
-    let filteredByPriority: task[] = data.filter(item => PriorityE[item.priority].toLowerCase().includes(isSearching.toLowerCase()));
-    let filteredByStatus: task[] = data.filter(item => {
+    let filteredByPriority: task[] = data.filter((item: task) => PriorityE[item.priority].toLowerCase().includes(isSearching.toLowerCase()));
+    let filteredByStatus: task[] = data.filter((item: task) => {
         let a = item.status ? "in progress" : "done";
         if(a.toLowerCase().includes(isSearching.toLowerCase())) {
             return true;
@@ -35,10 +35,10 @@ export const TaskList = () => {
         }
     });
 
-    const filteredUsers: user[] = users.filter(item => item.login.toLowerCase().includes(isSearching.toLowerCase()));
-    let filteredByCreator: any = []
+    const filteredUsers: user[] = users.filter((item: user) => item.login.toLowerCase().includes(isSearching.toLowerCase()));
+    let filteredByCreator: task[] = []
     filteredUsers.forEach(item => {
-        let i = data.filter(item2 => item._id == item2.creator)
+        let i = data.filter((item2: task) => item._id == item2.creator)
         if(i[0]) {
             filteredByCreator = [...filteredByCreator, ...i]
         }
@@ -96,7 +96,7 @@ export const TaskList = () => {
                     <div className="h-full w-ninth lg:flex items-center justify-center text-center pointer-events-none select-none xs:hidden">STATUS CHANGE</div>
                     <div className="h-full w-1/6 lg:flex items-center justify-center pointer-events-none select-none xs:hidden">CREATED BY</div>
                     <div className="h-full lg:w-1/6 sx:w-1/2 flex items-center justify-evenly ">
-                        <input className="border-2 rounded-md w-36" type="text" onChange={(e:any) => setIsSearching(e.target.value)} placeholder="Search..."/>
+                        <input className="border-2 rounded-md w-36" type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIsSearching(e.target.value)} placeholder="Search..."/>
                     </div>
                 </div>
                 <div className="overflow-auto xs:h-ninetenth lg:h-eighttenth w-full">
@@ -123,7 +123,7 @@ export const TaskList = () => {
                             return <Task key={task._id} data={task}></Task>
                         })
                         : isSearching == '' || isSearching == null || isSearching == undefined ?
-                        data.map(task => {
+                        data.map((task: task) => {
                             return <Task key={task._id} data={task}></Task>
                         })
                         : <></>

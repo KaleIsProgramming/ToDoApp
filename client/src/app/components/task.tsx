@@ -1,5 +1,5 @@
 import { task, editTask, getTasks, removeTask } from "@/app/store/slices";
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import { PriorityE } from ".";
 import { useAppSelector, useAppDispatch } from "@/app/store";
 
@@ -24,6 +24,7 @@ export const Task:FC<TaskData> = ({data}) => {
 
     const users = useAppSelector((state) => state.userSlice.users);
     const creator = users.find(user => user._id == data.creator);
+    const priorityInput = useRef<HTMLInputElement>(null)
 
     const fullDate = new Date();
     const day = fullDate.getDate();
@@ -58,9 +59,13 @@ export const Task:FC<TaskData> = ({data}) => {
 
     }
 
-    const priorityLvlHandler = (e:any) => {
-        if(e.target.value < 1 || e.target.value > 3) {
-        e.target.value = 1;
+    const priorityLvlHandler = (e: string) => {
+        if(+e < 1) {
+            console.log('1')
+            e = '1';
+        } else if (+e > 3) {
+            e = '3';
+            console.log('3')
         }
     }
 
@@ -117,7 +122,7 @@ export const Task:FC<TaskData> = ({data}) => {
                             </div>
                             <div className="h-1/4 w-full flex flex-col justify-center select-none">
                                 PRIORITY LVL
-                                <input className="border-2 rounded-md text-center" id="prioI" type="number" onInput={(e: any) => priorityLvlHandler(e)} min={1} max={3} defaultValue={data.priority} />
+                                <input ref={priorityInput} className="border-2 rounded-md text-center" id="prioI" type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => priorityLvlHandler(e.target.value)} min={1} max={3} defaultValue={data.priority} />
                             </div>
                         </div>
                         <div className="h-1/3 lg:w-1/2 xs:w-3/4 flex items-center justify-evenly">
