@@ -23,3 +23,6 @@ To run app, open the client and server folders in different windows
   
   ----BUILDING APP---- 
     To build app type in console of your IDE following command: "npm run build" and then if u wanna run it localy just type in console "npm start".
+----DOCKER---------------------------------------------
+to create image for the client side copy paste this commend to your IDE console : "docker run -d -p 3003:3000 nextjsapp "
+to create image for the server side copy paste this commend to your IDE console : "docker run -d -p 3002:3001 serverapi" 
