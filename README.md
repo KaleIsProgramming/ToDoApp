@@ -6,7 +6,7 @@ To run app, open the client and server folders in different windows
     
    the back-end works on mongodb database. To connect it you need to create your own free or paid mongodb database from following website : 
     "https://account.mongodb.com/account/login?n=https%3A%2F%2Fcloud.mongodb.com%2Fv2%2F656f5df212c5f94e505bbe47&nextHash=%23overview&signedOut=true".
-    After creating database I would recommend to download mongodb compass from this website -- > "https://www.mongodb.com/try/download/shell",
+    After creating database I would recommend to download mongodb compass from this website --> "https://www.mongodb.com/try/download/shell",
     ,then u have to connect it with your database. After these steps lets connect your mongodb db with the code. Open on the server side file called database.ts (its in the util folder) and 
     then paste your connect link that you used to connect the compass. In line 8 paste your database name. That's all.
 
